@@ -45,6 +45,7 @@ app.get("/badge", async (req, res) => {
     const scoreColor = score >= 3.5 ? "d50b0b" : "003089";
     const svg = await fetchBadgeSvg(label, score, scoreColor);
     res.setHeader("Content-Type", "image/svg+xml");
+    res.setHeader("Cache-Control", "max-age=604800");
     res.send(svg);
   } catch (e) {
     res.status(400).json({ message: e.message });
